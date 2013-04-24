@@ -4,10 +4,8 @@
  * PyroStreams Image Field Type
  *
  * @package		PyroCMS\Core\Modules\Streams Core\Field Types
- * @author		Parse19
- * @copyright	Copyright (c) 2011 - 2012, Parse19
- * @license		http://parse19.com/pyrostreams/docs/license
- * @link		http://parse19.com/pyrostreams
+ * @author		PyroCMS Dev Team
+ * @copyright	Copyright (c) 2013, PyroCMS
  */
 class Field_image
 {
@@ -19,21 +17,16 @@ class Field_image
 
 	public $custom_parameters		= array('folder', 'resize_width', 'resize_height', 'keep_ratio', 'allowed_types');
 
-	public $version					= '1.3.0';
+	public $version					= '2.0.0';
 
-	public $author					= array('name' => 'Parse19', 'url' => 'http://parse19.com');
+	public $author					= array('name' => 'PyroCMS', 'url' => 'http://pyrocms.com');
 
 	public $input_is_file			= true;
-
-	// --------------------------------------------------------------------------
 
 	public function __construct()
 	{
 		get_instance()->load->library('image_lib');
 	}
-
-	// --------------------------------------------------------------------------
-
 	/**
 	 * Output form input
 	 *
@@ -46,6 +39,7 @@ class Field_image
 		$this->CI->load->config('files/files');
 
 		$out = '';
+
 		// if there is content and it is not dummy or cleared
 		if ($params['value'] and $params['value'] != 'dummy')
 		{
@@ -64,12 +58,9 @@ class Field_image
 		return $out .= form_upload($options);
 	}
 
-	// --------------------------------------------------------------------------
-
 	/**
 	 * Process before saving to database
 	 *
-	 * @access	public
 	 * @param	array
 	 * @param	obj
 	 * @return	string
@@ -116,12 +107,9 @@ class Field_image
 		}
 	}
 
-	// --------------------------------------------------------------------------
-
 	/**
 	 * Pre Output
 	 *
-	 * @access	public
 	 * @param	array
 	 * @return	string
 	 */
@@ -138,16 +126,13 @@ class Field_image
 		return '<img src="'.site_url('files/thumb/'.$input).'" alt="'.$this->obvious_alt($image).'" />';
 	}
 
-	// --------------------------------------------------------------------------
-
 	/**
 	 * Process before outputting for the plugin
 	 *
 	 * This creates an array of data to be merged with the
 	 * tag array so relationship data can be called with
-	 * a {field.column} syntax
+	 * a {{ field:column }} syntax
 	 *
-	 * @access	public
 	 * @param	string
 	 * @param	string
 	 * @param	array
@@ -202,13 +187,10 @@ class Field_image
 		}
 	}
 
-	// --------------------------------------------------------------------------
-
 	/**
 	 * Choose a folder to upload to.
 	 *
-	 * @access	public
-	 * @param	[string - value]
+	 * @param	string [$value]
 	 * @return	string
 	 */
 	public function param_folder($value = null)
@@ -240,13 +222,10 @@ class Field_image
 		return form_dropdown('folder', $choices, $value);
 	}
 
-	// --------------------------------------------------------------------------
-
 	/**
 	 * Param Resize Width
 	 *
-	 * @access	public
-	 * @param	[string - value]
+	 * @param	string  $value
 	 * @return	string
 	 */
 	public function param_resize_width($value = null)
@@ -254,13 +233,10 @@ class Field_image
 		return form_input('resize_width', $value);
 	}
 
-	// --------------------------------------------------------------------------
-
 	/**
 	 * Param Resize Height
 	 *
-	 * @access	public
-	 * @param	[string - value]
+	 * @param	string  [$value]
 	 * @return	string
 	 */
 	public function param_resize_height($value = null)
@@ -268,13 +244,10 @@ class Field_image
 		return form_input('resize_height', $value);
 	}
 
-	// --------------------------------------------------------------------------
-
 	/**
 	 * Param Allowed Types
 	 *
-	 * @access	public
-	 * @param	[string - value]
+	 * @param	string  [$value]
 	 * @return	string
 	 */
 	public function param_keep_ratio($value = null)
@@ -286,13 +259,10 @@ class Field_image
 				'instructions'	=> lang('streams:image.keep_ratio_instr'));
 	}
 
-	// --------------------------------------------------------------------------
-
 	/**
 	 * Param Allowed Types
 	 *
-	 * @access	public
-	 * @param	[string - value]
+	 * @param	string  [$value]
 	 * @return	string
 	 */
 	public function param_allowed_types($value = null)
@@ -302,12 +272,9 @@ class Field_image
 				'instructions'	=> lang('streams:image.allowed_types_instr'));
 	}
 
-	// --------------------------------------------------------------------------
-
 	/**
 	 * Obvious alt attribute for <img> tags only
 	 *
-	 * @access	private
 	 * @param	obj
 	 * @return	string
 	 */
