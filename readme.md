@@ -2,6 +2,8 @@
 
 This is an in-development image field type to replace the current image field type in PyroCMS.
 
-To install, just replace the contents of `system/cms/modules/streams\_core/field\_types/image/` with the contents of this repository.
+It adds the ability to upload an image immediately, without having to wait for a form submit.
 
-When this is a stable release it, will replace the current native image field type in PyroCMS on the next release.
+To install, just replace the contents of `system/cms/modules/streams_core/field_types/image/` with the contents of this repository.
+
+When this is a stable release, it will replace the current native image field type in PyroCMS on the next release.
