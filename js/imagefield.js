@@ -20,8 +20,11 @@ $(function() {
 	    	},
 	        add: function (e, data) {
 
-	            // Add formdata
-	            data.formData = {field_id: $(this).attr('data-field-id')};
+	            // Add formdata - field id and the name.
+	            data.formData = {
+	            	field_id: $(this).attr('data-field-id'),
+	        		field_name: $(this).attr('name')
+	        	};
 
 	            data.context = $('<p/>').text('Uploading...').replaceAll($(this));
 	            data.submit();
@@ -38,6 +41,7 @@ $(function() {
 	 			} else {
 
 	   				var id = $(this).attr('id');
+	   				//alert(id);
 
 	   				// Add a hidden input with the value
 	   				// of the uploaded image.
@@ -63,6 +67,17 @@ $(function() {
 	}
 
 	bindFileUpload($('.upload-img-js'));
+
+	// Re-bind for new row for grid
+	$('.add_grid_row').click(function(e) {
+
+		e.preventDefault();
+
+		setTimeout(function(){
+			bindFileUpload($('.upload-img-js'));
+		}, 800);
+
+	});
 
   	/**
   	 * Choose Image Function

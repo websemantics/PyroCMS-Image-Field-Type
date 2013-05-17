@@ -134,14 +134,16 @@ class Field_image
 	 */
 	public function pre_output_plugin($input, $params)
 	{
-		if ( ! $input or $input == 'dummy' ) return null;
+		if ( ! $input or $input == 'dummy' ) {
+			return null;
+		}
 
 		$this->CI->load->library('files/files');
 
 		$file = Files::get_file($input);
 
-		if ($file['status'])
-		{
+		if ($file['status']) {
+
 			$image = $file['data'];
 
 			// If we don't have a path variable, we must have an
@@ -302,8 +304,9 @@ class Field_image
 
 		// Get/decode the field_id
 		$field_id_raw = $this->CI->input->post('field_id');
+		$field_name = $this->CI->input->post('field_name');
 
-		if ( ! $field_id_raw) {
+		if ( ! $field_id_raw or ! $field_name) {
 			$return['error'] = 'No field ID provided.';
 		}
 
@@ -332,7 +335,7 @@ class Field_image
 		// If you don't set allowed types, we'll set it to allow all.
 		$allowed_types 	= (isset($field->field_data['allowed_types'])) ? $field->field_data['allowed_types'] : '*';
 
-		$upload = Files::upload($field->field_data['folder'], null, $field->field_slug.'_image_input', $resize_width, $resize_height, $keep_ratio, $allowed_types);
+		$upload = Files::upload($field->field_data['folder'], null, $field_name, $resize_width, $resize_height, $keep_ratio, $allowed_types);
 
 		if ( ! $upload['status']) {
 			$return['error'] = $upload['message'];
